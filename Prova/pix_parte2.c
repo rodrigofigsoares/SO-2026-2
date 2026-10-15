@@ -10,7 +10,7 @@
  *   (B) EXCLUSAO MUTUA (mutex) na secao critica: so uma thread por vez le-soma-grava o saldo.
  *
  * Compilar: gcc -O2 -Wall -pthread -o pix_parte2 pix_parte2.c
- * Uso     : ./pix_parte2 -n N [-p P] [-t proc_ms] [-s semente] [-u us] [-k] [-q]
+ * Uso     : ./pix_parte2 -n N [-p P] [-t proc_ms] [-s semente] [-u us] [-k] [-q]e
  *           -k  desliga o mutex (so FCFS) para mostrar que ele e' indispensavel
  */
 #define _GNU_SOURCE
