@@ -1,0 +1,85 @@
+Program: parallelized Fibonacci
+
+This program implements a Fibonacci summation using threads.
+
+Input:
+N: Number of steps in the sum (N > 0)
+
+Output:
+The Fibonacci sum
+
+Compile:
+gcc -o <my-program>.out <my-program>.c -lpthread
+*/
+
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int sum = 0;
+
+typedef struct Operand {
+int x1; // First term of the sum
+int x2; // Second term of the sum
+} Operand;
+
+Operand *operandPtr;
+
+void *summation(void *data); // Thread function
+
+int main(int argc, char *argv[]) {
+int N = ...;
+operandPtr = (Operand *)malloc(sizeof(Operand));
+
+// Input validation
+if(argc != 2) {
+fprintf(stderr, "Sintax: <my-program.out> <number-of-steps>\n");
+exit(-1);
+}
+
+if(N < 0) {
+fprintf(stderr, "Argument %d must be non-negative\n", N);
+exit(-1);
+}
+
+pthread_t tid[N]; // TID - Thread identifier
+pthread_attr_t attr; // Thread attributes
+
+// Initialization
+operandPtr->x1 = 0;
+operandPtr->x2 = 1;
+
+printf("N : %d terms\n", N);
+printf("Sum: %02d, Partials: %02d, %02d\n", sum, operandPtr->x1, operandPtr->x2);
+
+// 1. Define threads with default attributes
+pthread_attr_init(&attr);
+
+// 2. Create threads
+for(int k=0; k<N; k++) {
+pthread_create(&tid[k], &attr, summation, operandPtr);
+}
+
+// 3. Wait for threads to finish
+for(int k=0; k<N; k++) {
+pthread_join(tid[k], NULL);
+}
+
+free(operandPtr);
+operandPtr = NULL;
+}
+
+// Thread function
+void *summation(void data) {
+/
+s->x1: First term of the sum
+s->x2: Second term of the sum
+*/
+
+Operand *s = (Operand *)data;
+
+sum = ...;
+printf("Sum: %02d, Partials: %02d, %02d\n", sum, operandPtr->x1, operandPtr->x2);
+
+pthread_exit(0);
+}
